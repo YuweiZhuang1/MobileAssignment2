@@ -18,7 +18,7 @@ public class Hud {
 
     private Integer worldTimer;
     private float timeCount;
-    private Integer score;
+     Integer score;
 
     Label countdownLabel;
     Label scoreLabel;

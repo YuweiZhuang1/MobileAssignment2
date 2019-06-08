@@ -14,12 +14,16 @@ public class Coin extends InteractiveTileObject {
     public Coin(GameScreen screen, Rectangle bounds) {
         super(screen, bounds);
         fixture.setUserData(this);
-
+        setCategoryFilter(MyGdxGame.COIN_BIT);
     }
 
     @Override
     public void onHeadHit() {
         Gdx.app.log("Coin","Hit a coin");
+        setCategoryFilter(MyGdxGame.DES_BIT);
+        getCell().setTile(null);
+
+        this.screen.hud.score += 60;
     }
 
 

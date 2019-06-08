@@ -11,6 +11,12 @@ public class MyGdxGame extends Game implements ApplicationListener {
 	public static GameScreen gameScreen;
 
 	public static final float PPM = 1;
+
+    public static final short DEA_BIT = 1;
+	public static final short CHAR_BIT = 2;
+    public static final short BRIC_BIT = 4;
+	public static final short COIN_BIT = 8;
+    public static final short DES_BIT = 16;
 	@Override
 	public void create() {
 		Gdx.app.log("MyGdxGame: "," create");

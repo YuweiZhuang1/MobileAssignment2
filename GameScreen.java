@@ -41,7 +41,7 @@ public class GameScreen implements Screen {
     private Skin skin;
     private Stage stage;
 
-    private Hud hud;
+     Hud hud;
 
     float cameraX;
     float cameraY;

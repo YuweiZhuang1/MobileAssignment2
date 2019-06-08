@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Plane;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -34,8 +35,14 @@ public class WorldCreator {
             body = world.createBody(bdef);
 
             shape.setAsBox(rect.getWidth()/2 / MyGdxGame.PPM,rect.getHeight()/2 / MyGdxGame.PPM) ;
+
+
+            fdef.filter.categoryBits = MyGdxGame.DEA_BIT;
             fdef.shape = shape;
+
             body.createFixture(fdef);
+
+
         }
 
         //todo get(2) is ground, get(5) is brick, get(5) is sky background, get(3) is pike, get(6)????

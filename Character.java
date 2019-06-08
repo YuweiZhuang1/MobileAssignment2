@@ -216,15 +216,25 @@ public class Character extends Sprite {
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(5 / MyGdxGame.PPM);
-
-        fdef.shape = shape;
-        b2body.createFixture(fdef);
 
         EdgeShape head = new EdgeShape();
         head.set(new Vector2(-2,7), new Vector2(2,7));
+
+        fdef.filter.categoryBits = MyGdxGame.CHAR_BIT;
+
+        //what can collide with
+        fdef.filter.maskBits = MyGdxGame.COIN_BIT | MyGdxGame.BRIC_BIT | MyGdxGame.DEA_BIT;
+
         fdef.shape = head;
+        b2body.createFixture(fdef);
+
+        CircleShape shape = new CircleShape();
+        shape.setRadius(8 );
+        fdef.shape = shape;
+
+        //fdef.isSensor = true;
+
+
         fdef.isSensor = true;
 
         // in future head is mario head
