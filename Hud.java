@@ -32,7 +32,9 @@ public class Hud {
         timeCount = 0;
         score = 0;
 
-        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera());
+        viewport = new FitViewport(400, 208, new OrthographicCamera());
+        viewport.setScreenSize(400,208);
+        viewport.setCamera(new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
         Table table = new Table();

@@ -9,6 +9,8 @@ public class MyGdxGame extends Game implements ApplicationListener {
 	public static MenuScreen menuScreen;
 	// The class with the game
 	public static GameScreen gameScreen;
+
+	public static final float PPM = 1;
 	@Override
 	public void create() {
 		Gdx.app.log("MyGdxGame: "," create");
