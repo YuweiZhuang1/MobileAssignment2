@@ -66,4 +66,14 @@ public class Hud {
 
     }
 
+    public void update(float f){
+        timeCount += f;
+
+        if(timeCount >= 1){
+            worldTimer --;
+            countdownLabel.setText(String.format("%03d",worldTimer));
+            timeCount = 0;
+        }
+    }
+
 }

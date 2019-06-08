@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -35,6 +36,7 @@ public class GameScreen implements Screen {
     MyGdxGame game; // Note it’s "MyGdxGame" not "Game"
     // constructor to keep a reference to the main Game class
 
+    TextureAtlas atlas;
     private SpriteBatch batch;
     private Skin skin;
     private Stage stage;
@@ -59,6 +61,8 @@ public class GameScreen implements Screen {
 
     Character mainC;
 
+    Enemy s1;
+
     public GameScreen(MyGdxGame game){
         this.game = game;
         camera = new OrthographicCamera();
@@ -66,6 +70,7 @@ public class GameScreen implements Screen {
         gamePort.setScreenSize(400,208);
         gamePort.setCamera(camera);
 
+        atlas = new TextureAtlas("Mario_and_Enemies.pack");
 
 
         mapLoader = new TmxMapLoader();
@@ -77,12 +82,15 @@ public class GameScreen implements Screen {
         world = new World(new Vector2(0,-10),true);
         b2dr = new Box2DDebugRenderer();
 
-        new WorldCreator(world,map);
+        new WorldCreator(this);
 
 
-        mainC = new Character(world);
+        mainC = new Character(world,this);
+
+        world.setContactListener(new WorldContactListener());
 
 
+        s1 = new Enemy(50,mainC.getY());
     }
     public void create() {
         skin = new Skin(Gdx.files.internal("gui/uiskin.json"));
@@ -94,16 +102,21 @@ public class GameScreen implements Screen {
 
     }
 
-
+    public TextureAtlas getAtlas(){
+        return this.atlas;
+    }
 
     public void update(float f){
         handleInput(f);
 
         world.step(1/10f,6,2);
 
+        mainC.update(f,batch);
+        hud.update(f);
         camera.position.x = mainC.b2body.getPosition().x;
         camera.update();
         renderer.setView(camera);
+
     }
 
     private void handleInput(float f) {
@@ -142,10 +155,26 @@ public class GameScreen implements Screen {
         //reder map
         b2dr.render(world,camera.combined);
 
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
+        mainC.draw(batch);
+
+        batch.end();
+
+
         batch.setProjectionMatrix(hud.stage.getCamera().combined);
+
+
         hud.stage.draw();
 
+        batch.begin();
+        s1.update(batch);
+        batch.end();
+
     }
+
+
+
     @Override
     public void dispose() {
         map.dispose();
@@ -157,6 +186,14 @@ public class GameScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         gamePort.update(width,height);
+    }
+
+    public TiledMap getMap(){
+        return map;
+    }
+
+    public World getWorld(){
+        return world;
     }
     @Override
     public void pause() { }
