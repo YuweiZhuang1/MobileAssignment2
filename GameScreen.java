@@ -82,6 +82,8 @@ public class GameScreen implements Screen {
         world = new World(new Vector2(0,-10),true);
         b2dr = new Box2DDebugRenderer();
 
+        //b2dr.setDrawBodies(false);
+
         new WorldCreator(this);
 
 
@@ -127,18 +129,24 @@ public class GameScreen implements Screen {
         }*/
 
         // for jumpping
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-            mainC.b2body.applyLinearImpulse(new Vector2(0,160f), mainC.b2body.getWorldCenter(),true);
-        }
+        if (Gdx.input.isTouched()) {
+            float x = Gdx.input.getX();
+            float y = Gdx.graphics.getHeight() - Gdx.input.getY() ;
 
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && mainC.b2body.getLinearVelocity().x >= -60){
-            mainC.b2body.applyLinearImpulse(new Vector2(-30f,0),mainC.b2body.getWorldCenter(),true);
-        }
+            //if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            if (y < Gdx.graphics.getHeight() * 0.3f) {
+                mainC.b2body.applyLinearImpulse(new Vector2(0, 160f), mainC.b2body.getWorldCenter(), true);
+            }
+
+            if (x < Gdx.graphics.getWidth() * 0.3f && mainC.b2body.getLinearVelocity().x >= -60) {
+                mainC.b2body.applyLinearImpulse(new Vector2(-30f, 0), mainC.b2body.getWorldCenter(), true);
+            }
 
 
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && mainC.b2body.getLinearVelocity().x <= 60){
-           // move right code, always follow the player
-            mainC.b2body.applyLinearImpulse(new Vector2(30f,0),mainC.b2body.getWorldCenter(),true);
+            if (x > Gdx.graphics.getWidth() * 0.7f && mainC.b2body.getLinearVelocity().x <= 60) {
+                // move right code, always follow the player
+                mainC.b2body.applyLinearImpulse(new Vector2(30f, 0), mainC.b2body.getWorldCenter(), true);
+            }
         }
 
 
@@ -164,12 +172,25 @@ public class GameScreen implements Screen {
 
         batch.setProjectionMatrix(hud.stage.getCamera().combined);
 
-
         hud.stage.draw();
 
         batch.begin();
         s1.update(batch);
         batch.end();
+
+        if(mainC.isAlive == false){
+            game.setScreen(new GameOver(game));
+        }
+
+        if(mainC.getY() < 0){
+            mainC.isAlive = false;
+        }
+
+
+        if(mainC.isWin == true){
+            game.setScreen(new WinScreen(game));
+        }
+
 
     }
 

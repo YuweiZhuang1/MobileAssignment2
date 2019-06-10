@@ -24,8 +24,8 @@ public class WorldContactListener implements ContactListener {
 
             Gdx.app.log("Beg","data is: " + object.getUserData());
 
-            if(object.getUserData() != null && object.getUserData().getClass().equals(Coin.class)){
-                Gdx.app.log("Coin","cccccc is: " + object.getUserData());
+            if(object.getUserData() != null && object.getUserData().getClass().equals(Pike.class)){
+                Gdx.app.log("Pike","cccccc is: " + object.getUserData());
 
             }
             // if object class is InteractiveTileObject class

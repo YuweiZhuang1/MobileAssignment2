@@ -21,9 +21,15 @@ public class Coin extends InteractiveTileObject {
     public void onHeadHit() {
         Gdx.app.log("Coin","Hit a coin");
         setCategoryFilter(MyGdxGame.DES_BIT);
+
+        if(getCell().getTile()!=null) {
+            this.screen.game.coinSound.play(1.0f);
+        }
+
+
         getCell().setTile(null);
 
-        this.screen.hud.score += 60;
+        this.screen.hud.increaseScore();
     }
 
 

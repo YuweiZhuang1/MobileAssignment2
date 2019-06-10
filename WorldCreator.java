@@ -34,7 +34,7 @@ public class WorldCreator {
 
             body = world.createBody(bdef);
 
-            shape.setAsBox(rect.getWidth()/2 / MyGdxGame.PPM,rect.getHeight()/2 / MyGdxGame.PPM) ;
+            shape.setAsBox(rect.getWidth()/2 ,rect.getHeight() *1.3f) ;
 
 
             fdef.filter.categoryBits = MyGdxGame.DEA_BIT;
@@ -71,6 +71,13 @@ public class WorldCreator {
             Rectangle rect = ((RectangleMapObject)object).getRectangle();
 
             new Pike(screen,rect);
+        }
+
+        // chest
+        for(MapObject object: map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject)object).getRectangle();
+
+            new Chest(screen,rect);
         }
 
 

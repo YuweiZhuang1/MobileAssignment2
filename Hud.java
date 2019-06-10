@@ -66,6 +66,10 @@ public class Hud {
 
     }
 
+    public void increaseScore(){
+        this.score = score + 60;
+    }
+
     public void update(float f){
         timeCount += f;
 

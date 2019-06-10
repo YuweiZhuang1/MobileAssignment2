@@ -41,7 +41,7 @@ public abstract class InteractiveTileObject {
 
         body = world.createBody(bdef);
 
-        shape.setAsBox(bounds.getWidth()/2 / MyGdxGame.PPM,bounds.getHeight()/2 / MyGdxGame.PPM) ;
+        shape.setAsBox(bounds.getWidth()/2,bounds.getHeight()*0.5f ) ;
         fdef.shape = shape;
         body.createFixture(fdef);
 

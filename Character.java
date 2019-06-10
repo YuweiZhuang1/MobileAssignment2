@@ -35,6 +35,8 @@ public class Character extends Sprite {
     float stateTimer;
     boolean runningRight;
 
+    public static boolean isAlive = true;
+
 
     private static final int FRAME_COLS = 4, FRAME_ROWS = 8;
 
@@ -45,6 +47,8 @@ public class Character extends Sprite {
     float stateTime;
 
     TextureRegion[] walkFrames;
+
+    static boolean isWin = false;
 
 
 
@@ -211,7 +215,7 @@ public class Character extends Sprite {
     // create bounder for main character
     private void defineCharacter() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(32 / MyGdxGame.PPM,32 / MyGdxGame.PPM);
+        bdef.position.set(60 / MyGdxGame.PPM,60 / MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -223,7 +227,7 @@ public class Character extends Sprite {
         fdef.filter.categoryBits = MyGdxGame.CHAR_BIT;
 
         //what can collide with
-        fdef.filter.maskBits = MyGdxGame.COIN_BIT | MyGdxGame.BRIC_BIT | MyGdxGame.DEA_BIT;
+        fdef.filter.maskBits = MyGdxGame.COIN_BIT | MyGdxGame.BRIC_BIT | MyGdxGame.DEA_BIT | MyGdxGame.PIKE_BIT | MyGdxGame.CHE_BIT;
 
         fdef.shape = head;
         b2body.createFixture(fdef);
