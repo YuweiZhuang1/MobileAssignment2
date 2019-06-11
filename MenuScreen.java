@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -19,6 +20,8 @@ public class MenuScreen implements Screen {
     private Skin skin;
     private Stage stage;
 
+    Texture bg;
+
 
     public MenuScreen(MyGdxGame game){
         this.game = game;
@@ -30,10 +33,10 @@ public class MenuScreen implements Screen {
         stage = new Stage();
 
 
-        final TextButton button = new TextButton("Click me", skin, "default");
-        button.setWidth(600f);
-        button.setHeight(400f);
-        button.setPosition(Gdx.graphics.getWidth() /2 - 100f, Gdx.graphics.getHeight()/2 - 10f);
+        final TextButton button = new TextButton("PLAY", skin, "default");
+        button.setWidth(Gdx.graphics.getWidth() * 0.07f);
+        button.setHeight(Gdx.graphics.getHeight() * 0.05f);
+        button.setPosition(Gdx.graphics.getWidth() * 0.16f, Gdx.graphics.getHeight()/2 - Gdx.graphics.getHeight() * 0.3f);
 
         button.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
@@ -44,6 +47,26 @@ public class MenuScreen implements Screen {
         stage.addActor(button);
         Gdx.input.setInputProcessor(stage);
 
+
+        final TextButton quit = new TextButton("QUIT", skin, "default");
+        quit.setWidth(Gdx.graphics.getWidth() * 0.07f);
+        quit.setHeight(Gdx.graphics.getHeight() * 0.05f);
+        quit.setPosition(Gdx.graphics.getWidth() * 0.16f, Gdx.graphics.getHeight()/2 -   Gdx.graphics.getHeight() * 0.4f);
+
+        quit.addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                System.exit(0);
+
+            }
+        });
+        stage.addActor(quit);
+        Gdx.input.setInputProcessor(stage);
+
+        bg = new Texture("bg.jpg");
+
+        game.gameScreen.mainC.isAlive = true;
+        game.gameScreen.mainC.isWin = false;
+        game.gameScreen.mainC.setPosition(0,50);
     }
     public void render(float f) {
 
@@ -51,8 +74,15 @@ public class MenuScreen implements Screen {
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
 
         batch.begin();
+        batch.draw(bg,-5,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        batch.end();
+
+
+        batch.begin();
         stage.draw();
         batch.end();
+
+
 
     }
     @Override

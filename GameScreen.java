@@ -47,8 +47,6 @@ public class GameScreen implements Screen {
     float cameraY;
 
 
-    Texture character;
-
     OrthographicCamera camera;
     Viewport gamePort;
 
@@ -75,14 +73,14 @@ public class GameScreen implements Screen {
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("game map.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / MyGdxGame.PPM);
+        renderer = new OrthogonalTiledMapRenderer(map, 1);
 
-        camera.position.set(gamePort.getScreenWidth() / 2 / MyGdxGame.PPM , gamePort.getScreenHeight() /2 / MyGdxGame.PPM ,0);
+        camera.position.set(gamePort.getScreenWidth()  / 2 , gamePort.getScreenHeight() /2 ,0);
 
         world = new World(new Vector2(0,-10),true);
         b2dr = new Box2DDebugRenderer();
 
-        //b2dr.setDrawBodies(false);
+        b2dr.setDrawBodies(false);
 
         new WorldCreator(this);
 
@@ -92,7 +90,7 @@ public class GameScreen implements Screen {
         world.setContactListener(new WorldContactListener());
 
 
-        s1 = new Enemy(50,mainC.getY());
+        //s1 = new Enemy(50,mainC.getY());
     }
     public void create() {
         skin = new Skin(Gdx.files.internal("gui/uiskin.json"));
@@ -100,6 +98,8 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
 
         hud = new Hud(batch);
+        game.bgm.setVolume(1.2f);
+        game.bgm.play();
 
 
     }
@@ -175,11 +175,11 @@ public class GameScreen implements Screen {
         hud.stage.draw();
 
         batch.begin();
-        s1.update(batch);
+//        s1.update(batch);
         batch.end();
 
         if(mainC.isAlive == false){
-            game.setScreen(new GameOver(game));
+            game.setScreen(game.gameoverScreen);
         }
 
         if(mainC.getY() < 0){
@@ -188,7 +188,7 @@ public class GameScreen implements Screen {
 
 
         if(mainC.isWin == true){
-            game.setScreen(new WinScreen(game));
+            game.setScreen(game.winScreen);
         }
 
 

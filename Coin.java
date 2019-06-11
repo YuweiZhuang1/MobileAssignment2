@@ -23,7 +23,7 @@ public class Coin extends InteractiveTileObject {
         setCategoryFilter(MyGdxGame.DES_BIT);
 
         if(getCell().getTile()!=null) {
-            this.screen.game.coinSound.play(1.0f);
+            this.screen.game.coinSound.play();
         }
 
 

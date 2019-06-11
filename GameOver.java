@@ -42,10 +42,13 @@ public class GameOver implements Screen {
         font.getData().setScale(2.5f,2.5f);
         font.setColor(Color.RED);
 
+
+
     }
     @Override
     public void show() {
-
+        game.bgm.stop();
+        game.failSound.play(1.0f);
     }
 
     @Override
@@ -53,6 +56,13 @@ public class GameOver implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
 
+        //if(!game.failSound.isPlaying()) {
+
+        if(Gdx.input.isTouched()){
+            game.setScreen(game.menuScreen);
+        }
+
+        //}
         batch.begin();
         font.draw(batch,"GAME OVER",Gdx.graphics.getWidth()/2 - 50,Gdx.graphics.getHeight() * 0.6f);
         batch.end();
