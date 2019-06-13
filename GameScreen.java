@@ -134,16 +134,18 @@ public class GameScreen implements Screen {
             float y = Gdx.graphics.getHeight() - Gdx.input.getY() ;
 
             //if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-            if (y < Gdx.graphics.getHeight() * 0.3f) {
+            //y < Gdx.graphics.getHeight() * 0.3f
+            if ( y < Gdx.graphics.getHeight() * 0.3f) {
                 mainC.b2body.applyLinearImpulse(new Vector2(0, 160f), mainC.b2body.getWorldCenter(), true);
             }
-
+            //( Gdx.input.isKeyJustPressed(Input.Keys.LEFT)
+                //x < Gdx.graphics.getWidth() * 0.3f
             if (x < Gdx.graphics.getWidth() * 0.3f && mainC.b2body.getLinearVelocity().x >= -60) {
                 mainC.b2body.applyLinearImpulse(new Vector2(-30f, 0), mainC.b2body.getWorldCenter(), true);
             }
-
-
-            if (x > Gdx.graphics.getWidth() * 0.7f && mainC.b2body.getLinearVelocity().x <= 60) {
+                //Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)
+                //(x > Gdx.graphics.getWidth() * 0.7f
+            if ( x > Gdx.graphics.getWidth() * 0.7f && mainC.b2body.getLinearVelocity().x <= 60) {
                 // move right code, always follow the player
                 mainC.b2body.applyLinearImpulse(new Vector2(30f, 0), mainC.b2body.getWorldCenter(), true);
             }

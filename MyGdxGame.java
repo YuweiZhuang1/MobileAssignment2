@@ -25,9 +25,9 @@ public class MyGdxGame extends Game implements ApplicationListener {
 	public static final short CHAR_BIT = 2;
     public static final short BRIC_BIT = 4;
 	public static final short COIN_BIT = 8;
-	public static final short PIKE_BIT = 12;
-    public static final short DES_BIT = 16;
-	public static final short CHE_BIT = 20;
+	public static final short PIKE_BIT = 32;
+    public static final short DESTORY_BIT = 16;
+	public static final short CHE_BIT = 64;
 
 	//https://freesound.org/people/jalastram/sounds/458059/ fail music
 	public Sound failSound;

@@ -15,8 +15,8 @@ public class Pike extends InteractiveTileObject  {
     @Override
     public void onHeadHit() {
         Gdx.app.log("Pike","Hit a pike");
-        setCategoryFilter(MyGdxGame.DES_BIT);
-        getCell().setTile(null);
+        // setCategoryFilter(MyGdxGame.DES_BIT);
+       // getCell().setTile(null);
 
 
         this.screen.mainC.isAlive = false;

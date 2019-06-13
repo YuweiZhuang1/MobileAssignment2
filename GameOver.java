@@ -59,6 +59,7 @@ public class GameOver implements Screen {
         //if(!game.failSound.isPlaying()) {
 
         if(Gdx.input.isTouched()){
+            //game.
             game.setScreen(game.menuScreen);
         }
 

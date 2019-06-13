@@ -215,33 +215,53 @@ public class Character extends Sprite {
     // create bounder for main character
     private void defineCharacter() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(60 / MyGdxGame.PPM,60 / MyGdxGame.PPM);
+        bdef.position.set(160 ,100 );
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
         FixtureDef fdef = new FixtureDef();
+        CircleShape shape = new CircleShape();
+        shape.setRadius(6 );
 
-        EdgeShape head = new EdgeShape();
-        head.set(new Vector2(-2,7), new Vector2(2,7));
 
         fdef.filter.categoryBits = MyGdxGame.CHAR_BIT;
-
-        //what can collide with
         fdef.filter.maskBits = MyGdxGame.COIN_BIT | MyGdxGame.BRIC_BIT | MyGdxGame.DEA_BIT | MyGdxGame.PIKE_BIT | MyGdxGame.CHE_BIT;
 
-        fdef.shape = head;
+        fdef.shape = shape;
         b2body.createFixture(fdef);
 
-        CircleShape shape = new CircleShape();
-        shape.setRadius(8 );
-        fdef.shape = shape;
 
-        //fdef.isSensor = true;
-
-
+        EdgeShape head = new EdgeShape();
+        head.set(new Vector2(-7,7), new Vector2(7,7));
+        //what can collide with
+        fdef.shape = head;
         fdef.isSensor = true;
 
         // in future head is mario head
         b2body.createFixture(fdef).setUserData("head");
+
+        EdgeShape bot = new EdgeShape();
+        bot.set(new Vector2(7,-7), new Vector2(7,7));
+        //what can collide with
+        fdef.shape = bot;
+        fdef.isSensor = true;
+
+        // in future head is mario head
+        b2body.createFixture(fdef).setUserData("head");
+
+
+        EdgeShape lef = new EdgeShape();
+        lef.set(new Vector2(-7,-7), new Vector2(-7,7));
+        //what can collide with
+        fdef.shape = lef;
+        fdef.isSensor = true;
+
+        // in future head is mario head
+        b2body.createFixture(fdef).setUserData("head");
+
+
+
+
+
     }
 }

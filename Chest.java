@@ -15,7 +15,7 @@ public class Chest extends InteractiveTileObject {
     public void onHeadHit() {
 
         //Gdx.app.log("Coin","Hit a coin");
-        setCategoryFilter(MyGdxGame.DES_BIT);
+        setCategoryFilter(MyGdxGame.DESTORY_BIT);
         getCell().setTile(null);
 
         this.screen.mainC.isWin = true;

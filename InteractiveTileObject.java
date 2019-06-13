@@ -37,13 +37,13 @@ public abstract class InteractiveTileObject {
 
 
         bdef.type = BodyDef.BodyType.StaticBody;
-        bdef.position.set(bounds.getX() + bounds.getWidth() / 2  / MyGdxGame.PPM, bounds.getY() + bounds.getHeight() /2/ MyGdxGame.PPM );
+        bdef.position.set(bounds.getX() + bounds.getWidth() / 2 , bounds.getY() + bounds.getHeight() /2 );
 
         body = world.createBody(bdef);
 
         shape.setAsBox(bounds.getWidth()/2,bounds.getHeight()*0.5f ) ;
         fdef.shape = shape;
-        body.createFixture(fdef);
+        //body.createFixture(fdef);
 
 
 

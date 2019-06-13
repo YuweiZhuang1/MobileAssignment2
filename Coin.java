@@ -20,7 +20,8 @@ public class Coin extends InteractiveTileObject {
     @Override
     public void onHeadHit() {
         Gdx.app.log("Coin","Hit a coin");
-        setCategoryFilter(MyGdxGame.DES_BIT);
+
+        setCategoryFilter(MyGdxGame.DESTORY_BIT);
 
         if(getCell().getTile()!=null) {
             this.screen.game.coinSound.play();

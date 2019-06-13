@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -30,17 +31,21 @@ public class WorldCreator {
             Rectangle rect = ((RectangleMapObject)object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set(rect.getX() + rect.getWidth() / 2  / MyGdxGame.PPM, rect.getY() + rect.getHeight() /2/ MyGdxGame.PPM );
+            bdef.position.set(rect.getX() + rect.getWidth() / 2 , rect.getY() + rect.getHeight() /2 );
 
             body = world.createBody(bdef);
 
-            shape.setAsBox(rect.getWidth()/2 ,rect.getHeight() *1.3f) ;
+            shape.setAsBox(rect.getWidth()/2 ,rect.getHeight() /2) ;
 
 
             fdef.filter.categoryBits = MyGdxGame.DEA_BIT;
             fdef.shape = shape;
 
-            body.createFixture(fdef);
+           // body.createFixture(fdef);
+
+            Fixture  fixture = body.createFixture(fdef);
+
+            fixture.setFilterData(fdef.filter);
 
 
         }
@@ -51,6 +56,8 @@ public class WorldCreator {
         // create brick body from tile map
         for(MapObject object: map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject)object).getRectangle();
+
+
 
             new Brick(screen,rect);
         }
