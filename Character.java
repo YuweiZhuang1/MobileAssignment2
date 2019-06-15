@@ -213,7 +213,7 @@ public class Character extends Sprite {
 
 
     // create bounder for main character
-    private void defineCharacter() {
+    public void defineCharacter() {
         BodyDef bdef = new BodyDef();
         bdef.position.set(160 ,100 );
         bdef.type = BodyDef.BodyType.DynamicBody;

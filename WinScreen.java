@@ -56,7 +56,7 @@ public class WinScreen implements Screen {
         font.draw(batch,"YOU WIN",Gdx.graphics.getWidth()/2 - 50,Gdx.graphics.getHeight() * 0.6f);
         batch.end();
         if(Gdx.input.isTouched()){
-            game.setScreen(game.menuScreen);
+            game.setScreen(new MenuScreen(game));
         }
 
     }

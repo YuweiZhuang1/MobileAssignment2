@@ -23,12 +23,14 @@ public class Coin extends InteractiveTileObject {
 
         setCategoryFilter(MyGdxGame.DESTORY_BIT);
 
-        if(getCell().getTile()!=null) {
-            this.screen.game.coinSound.play();
+        if(getCell()!=null) {
+            if (getCell().getTile() != null) {
+                this.screen.game.coinSound.play();
+            }
+
+
+            getCell().setTile(null);
         }
-
-
-        getCell().setTile(null);
 
         this.screen.hud.increaseScore();
     }

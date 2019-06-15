@@ -60,7 +60,8 @@ public class GameOver implements Screen {
 
         if(Gdx.input.isTouched()){
             //game.
-            game.setScreen(game.menuScreen);
+            game.setScreen(new MenuScreen(game));
+            stage.dispose();
         }
 
         //}

@@ -40,7 +40,7 @@ public class MenuScreen implements Screen {
 
         button.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                game.setScreen(game.gameScreen);
+                game.setScreen(new GameScreen(game));
 
             }
         });
